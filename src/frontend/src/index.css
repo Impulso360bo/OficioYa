@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Bricolage Grotesque";
+    --font-body: "DM Sans";
+    --font-mono: "Geist Mono";
+    --radius: 0.75rem;
+
+    --background: 0.98 0 0;
+    --foreground: 0.2 0 0;
+    --card: 1.0 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.15 0 0;
+
+    --primary: 0.62 0.22 48;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.45 0.05 257;
+    --secondary-foreground: 0.95 0 0;
+    --muted: 0.93 0.02 260;
+    --muted-foreground: 0.35 0.02 260;
+
+    --accent: 0.55 0.18 165;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.92 0.01 260;
+    --input: 0.94 0 0;
+    --ring: 0.62 0.22 48;
+
+    --chart-1: 0.62 0.22 48;
+    --chart-2: 0.55 0.18 165;
+    --chart-3: 0.65 0.19 150;
+    --chart-4: 0.45 0.05 257;
+    --chart-5: 0.5 0.12 120;
+
+    --sidebar: 0.97 0 0;
+    --sidebar-foreground: 0.2 0 0;
+    --sidebar-primary: 0.62 0.22 48;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.93 0.02 260;
+    --sidebar-accent-foreground: 0.35 0.02 260;
+    --sidebar-border: 0.92 0.01 260;
+    --sidebar-ring: 0.62 0.22 48;
+  }
+
+  .dark {
+    --background: 0.12 0 0;
+    --foreground: 0.93 0 0;
+    --card: 0.16 0 0;
+    --card-foreground: 0.93 0 0;
+    --popover: 0.2 0 0;
+    --popover-foreground: 0.93 0 0;
+
+    --primary: 0.72 0.2 48;
+    --primary-foreground: 0.12 0 0;
+
+    --secondary: 0.65 0.04 257;
+    --secondary-foreground: 0.88 0 0;
+    --muted: 0.25 0.02 260;
+    --muted-foreground: 0.65 0.02 260;
+
+    --accent: 0.65 0.16 165;
+    --accent-foreground: 0.12 0 0;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.12 0 0;
+
+    --border: 0.22 0.02 260;
+    --input: 0.2 0 0;
+    --ring: 0.72 0.2 48;
+
+    --chart-1: 0.72 0.2 48;
+    --chart-2: 0.65 0.16 165;
+    --chart-3: 0.75 0.17 150;
+    --chart-4: 0.65 0.04 257;
+    --chart-5: 0.6 0.1 120;
+
+    --sidebar: 0.16 0 0;
+    --sidebar-foreground: 0.93 0 0;
+    --sidebar-primary: 0.72 0.2 48;
+    --sidebar-primary-foreground: 0.12 0 0;
+    --sidebar-accent: 0.25 0.02 260;
+    --sidebar-accent-foreground: 0.88 0 0;
+    --sidebar-border: 0.22 0.02 260;
+    --sidebar-ring: 0.72 0.2 48;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-elevated {
+    @apply shadow-md;
+  }
+
+  .job-card {
+    @apply border-l-4 border-l-primary/20 bg-card rounded-lg p-4 transition-smooth hover:shadow-lg hover:border-l-primary/60;
+  }
+
+  /* Registration & Profile Utilities */
+  .role-card {
+    @apply bg-card border border-border rounded-lg p-4 cursor-pointer transition-smooth hover:border-primary hover:shadow-md;
+  }
+
+  .role-card.active {
+    @apply border-primary bg-primary/5 shadow-md;
+  }
+
+  .role-badge {
+    @apply inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold;
+  }
+
+  .role-badge.trabajador {
+    @apply bg-accent/20 text-accent;
+  }
+
+  .role-badge.cliente {
+    @apply bg-secondary/20 text-secondary;
+  }
+
+  .form-label {
+    @apply block text-sm font-semibold text-foreground mb-2;
+  }
+
+  .form-input {
+    @apply w-full px-3 py-2 bg-input border border-border rounded-md text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-smooth;
+  }
+
+  .form-select {
+    @apply w-full px-3 py-2 bg-input border border-border rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-smooth;
+  }
+
+  .profile-card {
+    @apply border-l-4 border-l-accent bg-card rounded-lg p-6 transition-smooth;
+  }
+
+  /* Commission System UI */
+  .balance-panel {
+    @apply border-l-4 bg-card rounded-lg p-6 transition-smooth;
+  }
+
+  .balance-panel.positive {
+    @apply border-l-accent;
+  }
+
+  .balance-panel.warning {
+    @apply border-l-primary;
+  }
+
+  .balance-panel.suspended {
+    @apply border-l-destructive;
+  }
+
+  .suspension-alert {
+    @apply bg-destructive/15 border border-destructive/30 rounded-lg p-4 mb-4;
+  }
+
+  .suspension-alert-title {
+    @apply text-destructive font-semibold text-sm mb-2;
+  }
+
+  .suspension-alert-text {
+    @apply text-destructive/80 text-xs leading-relaxed;
+  }
+
+  .qr-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-smooth hover:shadow-md;
+  }
+
+  .qr-placeholder {
+    @apply w-32 h-32 bg-muted/20 border-2 border-dashed border-muted rounded-md flex items-center justify-center;
+  }
+
+  .job-status-badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .job-status-badge.posted {
+    @apply bg-muted/30 text-muted-foreground;
+  }
+
+  .job-status-badge.in-progress {
+    @apply bg-primary/20 text-primary;
+  }
+
+  .job-status-badge.pending-approval {
+    @apply bg-destructive/20 text-destructive;
+  }
+
+  .job-status-badge.completed {
+    @apply bg-accent/20 text-accent;
+  }
+
+  .action-button-row {
+    @apply flex gap-3 mt-6 flex-wrap;
+  }
+
+  .action-button-primary {
+    @apply flex-1 min-w-40 px-4 py-3 bg-primary text-primary-foreground font-semibold rounded-lg transition-smooth hover:opacity-90 active:opacity-75;
+  }
+
+  .action-button-secondary {
+    @apply flex-1 min-w-40 px-4 py-3 bg-secondary/20 text-secondary border border-secondary/30 font-semibold rounded-lg transition-smooth hover:bg-secondary/30 active:bg-secondary/40;
+  }
+
+  .commission-stat {
+    @apply flex flex-col items-center justify-center p-3 bg-muted/10 rounded-lg;
+  }
+
+  .commission-stat-value {
+    @apply font-display font-bold text-lg text-foreground;
+  }
+
+  .commission-stat-label {
+    @apply text-xs text-muted-foreground font-medium;
+  }
+}

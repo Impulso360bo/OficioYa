@@ -1,0 +1,140 @@
+type UserRole = 
+ variant {
+   Cliente;
+   Trabajador;
+ };
+type UserProfile = 
+ record {
+   balance: float64;
+   city: BoliviaCity;
+   email: text;
+   id: UserId;
+   name: text;
+   phone: text;
+   profileStatus: ProfileStatus;
+   registeredAt: Timestamp;
+   role: UserRole;
+ };
+type UserId = principal;
+type UpdateProfileRequest = 
+ record {
+   city: BoliviaCity;
+   name: text;
+   phone: text;
+ };
+type Timestamp = int;
+type RegisterRequest = 
+ record {
+   city: BoliviaCity;
+   email: text;
+   name: text;
+   phone: text;
+   role: UserRole;
+ };
+type ProfileStatus = 
+ variant {
+   Active;
+   Suspended;
+ };
+type PageResult = 
+ record {
+   items: vec JobView;
+   limit: nat;
+   offset: nat;
+   total: nat;
+ };
+type JobView = 
+ record {
+   assignedWorker: opt UserId;
+   category: Category;
+   contactInfo: text;
+   description: text;
+   id: JobId;
+   isRemote: bool;
+   jobStatus: JobStatus;
+   location: text;
+   postedBy: opt UserId;
+   postedDate: Timestamp;
+   requirements: text;
+   salaryMax: nat;
+   salaryMin: nat;
+   title: text;
+ };
+type JobStatus = 
+ variant {
+   Cancelled;
+   Completed;
+   InProgress;
+   PendingApproval;
+   Posted;
+ };
+type JobId = nat;
+type Category = 
+ variant {
+   Albanil;
+   Carpintero;
+   Electricista;
+   Jardinero;
+   Mecanico;
+   Otros;
+   Pintor;
+   Plomero;
+   Soldador;
+ };
+type BoliviaCity = 
+ variant {
+   Beni;
+   Cochabamba;
+   ElAlto;
+   LaPaz;
+   Oruro;
+   Pando;
+   Potosi;
+   SantaCruz;
+   Sucre;
+   Tarija;
+ };
+type AddJobRequest = 
+ record {
+   category: Category;
+   contactInfo: text;
+   description: text;
+   isRemote: bool;
+   location: text;
+   requirements: text;
+   salaryMax: nat;
+   salaryMin: nat;
+   title: text;
+ };
+service : {
+  addJob: (req: AddJobRequest) -> (JobView);
+  applyForJob: (jobId: JobId) -> (variant {
+                                    err: text;
+                                    ok;
+                                  });
+  approveJob: (jobId: JobId) -> (variant {
+                                   err: text;
+                                   ok;
+                                 });
+  filterJobsByCategory: (category: Category, offset: nat, limit: nat) ->
+   (PageResult) query;
+  filterJobsByLocation: (location: text, offset: nat, limit: nat) ->
+   (PageResult) query;
+  getCallerUserProfile: () -> (opt UserProfile) query;
+  getJob: (id: JobId) -> (opt JobView) query;
+  getUserProfile: (user: principal) -> (opt UserProfile) query;
+  getWorkerBalance: () -> (float64) query;
+  initSampleData: () -> ();
+  listJobs: (offset: nat, limit: nat) -> (PageResult) query;
+  markJobComplete: (jobId: JobId) -> (variant {
+                                        err: text;
+                                        ok;
+                                      });
+  registerUser: (req: RegisterRequest) -> (UserProfile);
+  searchJobs: (keyword: text, offset: nat, limit: nat) -> (PageResult) query;
+  topUpBalance: (amount: float64) -> (variant {
+                                        err: text;
+                                        ok;
+                                      });
+  updateCallerUserProfile: (req: UpdateProfileRequest) -> (UserProfile);
+}

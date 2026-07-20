@@ -1,0 +1,86 @@
+// Version: 1.0.0
+type BoliviaCity__890269931 =
+  {
+    #Beni;
+    #Cochabamba;
+    #ElAlto;
+    #LaPaz;
+    #Oruro;
+    #Pando;
+    #Potosi;
+    #SantaCruz;
+    #Sucre;
+    #Tarija
+  };
+type Category__425461354 =
+  {
+    #Albanil;
+    #Carpintero;
+    #Electricista;
+    #Jardinero;
+    #Mecanico;
+    #Otros;
+    #Pintor;
+    #Plomero;
+    #Soldador
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type JobId__339598917 = Nat;
+type JobId__567733654 = JobId__339598917;
+type JobStatus__374926235 =
+  {#Cancelled; #Completed; #InProgress; #PendingApproval; #Posted};
+type Job__848768964 =
+  {
+    var assignedWorker : ?UserId__1043627770;
+    category : Category__425461354;
+    contactInfo : Text;
+    description : Text;
+    id : JobId__567733654;
+    isRemote : Bool;
+    var jobStatus : JobStatus__374926235;
+    location : Text;
+    postedBy : ?UserId__1043627770;
+    postedDate : Timestamp__301639476;
+    requirements : Text;
+    salaryMax : Nat;
+    salaryMin : Nat;
+    title : Text
+  };
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type ProfileStatus__878113956 = {#Active; #Suspended};
+type Timestamp__301639476 = Int;
+type UserId__1043627770 = Principal;
+type UserProfileInternal__580074259 =
+  {
+    var balance : Float;
+    var city : BoliviaCity__890269931;
+    email : Text;
+    id : UserId__1043627770;
+    var name : Text;
+    var phone : Text;
+    var profileStatus : ProfileStatus__878113956;
+    registeredAt : Timestamp__301639476;
+    role : UserRole__41952412
+  };
+type UserRole__41952412 = {#Cliente; #Trabajador};
+actor {
+  stable jobs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Job__848768964]];
+      var elementIndex : Nat__490723111
+    };
+  stable state : {var nextJobId : Nat; var seeded : Bool};
+  stable userProfiles :
+    {
+      var root : Node__46230540<Principal, UserProfileInternal__580074259>;
+      var size : Nat__490723111
+    }
+};

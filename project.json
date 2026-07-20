@@ -1,0 +1,23 @@
+{
+  "overview": "BuscaOficio es una plataforma boliviana que conecta trabajadores de oficios con clientes. Incluye sistema de comisiones del 20% con balance de trabajadores, suspensión automática de perfiles y módulo de recarga con QR.",
+  "features": [
+    "Registro separado para trabajadores y clientes",
+    "Búsqueda y filtro de empleos por categoría y ciudad boliviana",
+    "Sistema de comisiones 20% al completar trabajos",
+    "Balance de trabajador con suspensión automática si deuda supera -100 Bs",
+    "Flujo de aprobación cliente-trabajador para marcar trabajos como finalizados",
+    "Módulo de recarga de saldo con QR (placeholder)",
+    "Panel de balance con mensaje de estado y advertencias",
+    "Login con Internet Identity"
+  ],
+  "category": "marketplace",
+  "tags": [
+    "bolivia",
+    "oficios",
+    "marketplace",
+    "trabajadores",
+    "comisiones",
+    "plataforma"
+  ],
+  "last_updated": "2026-04-26T03:48:45.578Z"
+}
